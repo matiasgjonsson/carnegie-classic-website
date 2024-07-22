@@ -16,19 +16,20 @@ h2 a {
     width: 20rem;
     height: 100%;
     padding: 20px 30px;
-    background-color: white;
+    background-color: #333333;
+    color: white;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     font-size: 18px;
-    border: 2px solid black;
     align: center;
     box-sizing: inherit;
-    /*transition: color 0.5s ease;*/
 }
 
 .clickable-box:hover {
-    border-color: #18bfef;
+    /*border-color: #18bfef;*/
+    background-color: #4CAF50;
+    color: white !important;
 }
 
 /*

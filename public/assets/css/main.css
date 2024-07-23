@@ -2,7 +2,11 @@
 @import url("https://fonts.googleapis.com/css?family=Merriweather:300,700,300italic,700italic|Source+Sans+Pro:900");
 
 h2 a, h3 a {
-    text-decoration: underline;
+    color: #00A36C !important;
+}
+
+td a, p a {
+    font-weight: 900 !important;
 }
 
 .box-container {
@@ -28,7 +32,7 @@ h2 a, h3 a {
 
 .clickable-box:hover {
     /*border-color: #18bfef;*/
-    background-color: #4CAF50;
+    background-color: #00A36C;
     color: white !important;
 }
 

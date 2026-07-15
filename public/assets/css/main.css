@@ -504,6 +504,55 @@ q {
   max-width: 25%;
 }
 
+.feature-teaser {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  border: 1px solid var(--rule);
+  padding: 1.1rem 1.3rem;
+  margin: 0 0 1.8rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.feature-teaser:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+.feature-teaser img {
+  width: 5.5rem;
+  height: 5.5rem;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.feature-teaser .feature-eyebrow {
+  font-family: "Cinzel", Georgia, serif;
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.feature-teaser .feature-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 0 0 0.2rem;
+}
+.feature-teaser .feature-sub {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin: 0;
+}
+.feature-teaser .feature-arrow {
+  margin-left: auto;
+  color: var(--gold);
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
 /* ---------- Tables ---------- */
 
 .table-wrapper {

@@ -38,8 +38,7 @@ const PAGES = [
   {
     id: "main",
     title: "Carnegie Classic: Dance competition open to everyone",
-    wrapperClass: "fade-in",
-    preHeader: readContent("index-intro.html"),
+    cover: readContent("index-intro.html"),
     content: readContent("index.html"),
     extraFooter: readContent("index-extra-footer.html"),
     extraScripts: ["assets/js/custom.js"],
@@ -86,26 +85,20 @@ function readContent(name) {
 function renderNav(activeId) {
   const links = NAV_PAGES.map(
     (p) =>
-      `\t\t\t<li${p.id === activeId ? ' class="active"' : ""}><a href="${p.file}">${p.label}</a></li>`
+      `\t\t<li${p.id === activeId ? ' class="active"' : ""}><a href="${p.file}">${p.label}</a></li>`
   ).join("\n");
-  const icons = SOCIAL_LINKS.map(
-    (s) =>
-      `\t\t\t<li><a href="${s.url}" class="icon brands ${s.icon}"><span class="label">${s.label}</span></a></li>`
-  ).join("\n");
-  return `\t\t<nav id="nav">
-\t\t\t<ul class="links">
+  return `\t<nav id="nav">
+\t\t<a href="index.html" class="logo">Carnegie Classic</a>
+\t\t<ul class="links">
 ${links}
-\t\t\t</ul>
-\t\t\t<ul class="icons">
-${icons}
-\t\t\t</ul>
-\t\t</nav>`;
+\t\t</ul>
+\t</nav>`;
 }
 
 function renderFooterSocial() {
   return SOCIAL_LINKS.map(
     (s) =>
-      `\t\t\t\t\t<li><a target="_blank" href="${s.url}" class="icon brands alt ${s.icon}"><span class="label">${s.label}</span></a></li>`
+      `\t\t\t\t<li><a target="_blank" href="${s.url}" class="icon brands alt ${s.icon}"><span class="label">${s.label}</span></a></li>`
   ).join("\n");
 }
 
@@ -116,87 +109,65 @@ function renderExtraHeadLinks(page) {
 }
 
 function renderScripts(page) {
-  const base = [
-    "assets/js/jquery.min.js",
-    "assets/js/jquery.scrollex.min.js",
-    "assets/js/jquery.scrolly.min.js",
-    "assets/js/browser.min.js",
-    "assets/js/breakpoints.min.js",
-    "assets/js/util.js",
-    "assets/js/main.js",
-    ...(page.extraScripts || []),
-  ];
-  return base.map((src) => `\t\t<script src="${src}"></script>`).join("\n");
+  const scripts = page.extraScripts || [];
+  return scripts.map((src) => `\t<script src="${src}"></script>`).join("\n");
 }
 
 function renderPage(page) {
   const extraHead = renderExtraHeadLinks(page);
-  const wrapperClass = page.wrapperClass ? ` class="${page.wrapperClass}"` : "";
 
   return `<!DOCTYPE html>
-<html>
-\t<head>
-\t\t<!-- Google tag (gtag.js) -->
-\t\t<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4Z348WHVR"></script>
-\t\t<script>
-\t\t\twindow.dataLayer = window.dataLayer || [];
-\t\t\tfunction gtag(){dataLayer.push(arguments);}
-\t\t\tgtag('js', new Date());
+<html lang="en">
+<head>
+\t<!-- Google tag (gtag.js) -->
+\t<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4Z348WHVR"></script>
+\t<script>
+\t\twindow.dataLayer = window.dataLayer || [];
+\t\tfunction gtag(){dataLayer.push(arguments);}
+\t\tgtag('js', new Date());
 
-\t\t\tgtag('config', 'G-Y4Z348WHVR');
-\t\t</script>
+\t\tgtag('config', 'G-Y4Z348WHVR');
+\t</script>
 
-\t\t<title>${page.title}</title>
-\t\t<meta charset="utf-8" />
-\t\t<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-\t\t<link rel="stylesheet" href="assets/css/main.css" />
-${extraHead ? extraHead + "\n" : ""}\t\t<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-\t</head>
-\t<body class="is-preload">
+\t<title>${page.title}</title>
+\t<meta charset="utf-8" />
+\t<meta name="viewport" content="width=device-width, initial-scale=1" />
+\t<link rel="stylesheet" href="assets/css/main.css" />
+${extraHead ? extraHead + "\n" : ""}</head>
+<body>
+${page.cover ? page.cover + "\n\n" : ""}${renderNav(page.id)}
 
-\t\t<div id="wrapper"${wrapperClass}>
-${page.preHeader ? page.preHeader + "\n\n" : ""}\t\t\t<header id="header">
-\t\t\t\t<a href="index.html" class="logo">Carnegie Classic</a>
-\t\t\t</header>
-
-${renderNav(page.id)}
-
-\t\t\t<div id="main">
-
+\t<main id="main">
 ${page.content}
+\t</main>
 
+\t<footer id="footer">
+\t\t<div class="split contact">
+\t\t\t<div class="alt">
+\t\t\t\t<h3>Address</h3>
+\t\t\t\t<p>Jared L Cohon University Center<br />
+\t\t\t\t\t5032 Forbes Ave
+\t\t\t\t\tPittsburgh, PA 15213</p>
 \t\t\t</div>
-
-\t\t\t<footer id="footer">
-\t\t\t\t<section class="split contact">
-\t\t\t\t\t<section class="alt">
-\t\t\t\t\t\t<h3>Address</h3>
-\t\t\t\t\t\t<p>Jared L Cohon University Center<br />
-\t\t\t\t\t\t\t5032 Forbes Ave
-\t\t\t\t\t\t\tPittsburgh, PA 15213</p>
-\t\t\t\t\t</section>
-\t\t\t\t\t<section>
-\t\t\t\t\t\t<h3>Email</h3>
-\t\t\t\t\t\t<p><a href="mailto:cmuclassic@gmail.com">cmuclassic@gmail.com</a></p>
-\t\t\t\t\t</section>
-\t\t\t\t\t<section>
-\t\t\t\t\t\t<h3>Social</h3>
-\t\t\t\t\t\t<ul class="icons alt">
+\t\t\t<div>
+\t\t\t\t<h3>Email</h3>
+\t\t\t\t<p><a href="mailto:cmuclassic@gmail.com">cmuclassic@gmail.com</a></p>
+\t\t\t</div>
+\t\t\t<div>
+\t\t\t\t<h3>Social</h3>
+\t\t\t\t<ul class="icons alt">
 ${renderFooterSocial()}
-\t\t\t\t\t\t</ul>
-\t\t\t\t\t</section>
-${page.extraFooter ? page.extraFooter + "\n" : ""}\t\t\t\t</section>
-\t\t\t</footer>
-
-\t\t\t<div id="copyright">
-\t\t\t\t<ul><li>&copy; CMU Ballroom Dance Club</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+\t\t\t\t</ul>
 \t\t\t</div>
+${page.extraFooter ? page.extraFooter + "\n" : ""}\t\t</div>
 
+\t\t<div id="copyright">
+\t\t\t<ul><li>&copy; CMU Ballroom Dance Club</li></ul>
 \t\t</div>
+\t</footer>
 
 ${renderScripts(page)}
-
-\t</body>
+</body>
 </html>
 `;
 }

@@ -1,0 +1,7 @@
+{
+  "name": "carnegie-classic-website",
+  "private": true,
+  "scripts": {
+    "build": "node build.js"
+  }
+}
